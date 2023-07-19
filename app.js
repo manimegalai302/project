@@ -17,10 +17,9 @@ submitBtn.addEventListener('click',()=>{
         var x = document.createElement("BUTTON");
         var t = document.createTextNode("Delete");
         x.appendChild(t);
-        onDelete(this)
-        nodeList.appendChild(x);
-       
+        nodeList.appendChild(x)
       }
+
       function myFunction1() {
         var x = document.createElement("BUTTON");
         var t = document.createTextNode("edit");
@@ -28,13 +27,14 @@ submitBtn.addEventListener('click',()=>{
         nodeList.appendChild(x);
       
       }
-
-      function  onDelete(){
-        if (confirm("Are you sure to delete this notes ?")) {
-        item= li.parentElement.parentElement;
-        document.getElementById("display").deleteitem(item.itemIndex);
-        }
-    }
+        
+      function onDelete(li) {
+            if (confirm("Are you sure to delete this note?")) {
+              const parentUl = document.getElementById("display");
+              parentUl.removeChild(li);
+            }
+          }
+    
 
     container.appendChild(nodeList)
     

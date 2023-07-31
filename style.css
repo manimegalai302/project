@@ -18,31 +18,33 @@ h1{
 form{
     display:grid;
     padding: 20px;
- 
 }
-button{
+
+#submit{
    display: flex;
    justify-content: center;
-   padding:5px;
-   margin-left: 20px;
+    margin-top: 15px;
 }
+  
 #display{
     display:grid;
     justify-content: center;
     align-items: center;
-    color:#4b0082;
+    color:#8b13e1d2;
     padding:25px;
     font-size:20px;
 }
+
 li{
     list-style: none;
-    display: flex;
+    display:grid;
+    gap: 5px;
 }
-         /* mobile */
+
+/* mobile */
 @media screen and (max-width:367px){
     .notes-container{
         display: flex;
-        background-color: #e6e6fa;
     }
 }
          /* laptop */

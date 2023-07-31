@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
     <div class="notes-container">
-    <div class="top">
-    <h1>welcome notes</h1>
-   <form id="notesForm">
-    <label for="notes">Title:</label><br/>
-    <input type="text" id="title" placeholder="Enter title" required><br/>
-    <label for="content">Content:</label><br/>
-    <textarea type="text" id="content" placeholder="Enter content"  rows="5" cols="30" required></textarea>
-   </form>
-   <button id="submit">Submit</button>
-   </div>
-   </div>
-<div id="display">
-    <h5>Add Notes..</h5><br/>
-</div>
+      <div class="top">
+        <h1>welcome notes</h1>
+        <form id="notesForm">
+          <label for="notes">Title:</label><br />
+          <input
+            type="text"
+            id="title"
+            placeholder="Enter title"
+            required
+          /><br />
+          <label for="content">Content:</label><br />
+          <textarea
+            type="text"
+            id="content"
+            placeholder="Enter content"
+            rows="5"
+            cols="30"
+            required
+          ></textarea>
+          <button id="submit" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <div id="display">
+      <h5>Add Notes..</h5>
+      <br />
+    </div>
 
-    <script type="module" src="app.js"></script>
-</body>
-</html> 
+    <script src="app.js"></script>
+  </body>
+</html>

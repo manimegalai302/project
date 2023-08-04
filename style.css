@@ -2,9 +2,11 @@
     padding: 0px;
     margin: 0px;
 }
+
 body{
     background-color: #ffe4c4;
 }
+
 .notes-container{
     max-width: 100%;
     display:flex;
@@ -12,9 +14,11 @@ body{
     align-items: center;
     padding: 20px;
 }
+
 h1{
     font-size: 50px;
 }
+
 form{
     display:grid;
     padding: 20px;
@@ -25,23 +29,27 @@ form{
    justify-content: center;
     margin-top: 15px;
 }
-  
+
+h5{
+    text-align: center;
+    color:#8b13e1d2;
+ }
+
 #display{
     display:grid;
     justify-content: center;
     align-items: center;
-    color:#8b13e1d2;
     padding:25px;
     font-size:20px;
 }
 
 li{
     list-style: none;
-    display:grid;
+    display:flex;
     gap: 5px;
 }
 
-/* mobile */
+         /* mobile */
 @media screen and (max-width:367px){
     .notes-container{
         display: flex;
@@ -53,5 +61,3 @@ li{
         display: flex;
     }
 }
-
-

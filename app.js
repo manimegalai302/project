@@ -1,73 +1,78 @@
-let container = document.querySelector("#display");
 let title = document.querySelector("#title");
 let content = document.querySelector("#content");
 let unOrderList = document.createElement("ul");
-let nodeList = document.createElement("li");
+
 let submitBtn = document.querySelector("#submit");
 let form = document.getElementById("notesForm");
-let array=[];
+let notes = [];
 
-window.onload =() => {
-array = JSON.parse(localStorage.getItem('notes')) || []; // Check for existing notes in local storage
+window.onload = () => {
+  notes = JSON.parse(localStorage.getItem('notes')) || []; 
+  display(); 
 }
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const value1 = title.value;
-
-  
-
-  let heading = document.createElement("h4");
-  heading.textContent = value1;
-  nodeList.appendChild(heading);
-
   const value2 = content.value;
-    let para = document.createElement("p");
-    para.textContent = value2;
-    nodeList.appendChild(para);
+
+  if (submitBtn.innerHTML !== "update") {
+    const obj = { title: value1, content: value2 };
+    notes.push(obj);
+  } else {
   
+    submitBtn.innerHTML = "submit";
+  }
 
-  const obj = { title: value1, des: value2 };
-  console.log(obj);
+ 
+  localStorage.setItem('notes', JSON.stringify(notes));
 
-  array.push(obj);
-  // console.log(array);
-
-  var del = document.createElement("BUTTON");
-  del.innerHTML = "delete";
-  nodeList.appendChild(del);
-
-  del.addEventListener("click", () => {
-    nodeList.removeChild(heading);
-    nodeList.removeChild(para);
-    nodeList.removeChild(del);
-    nodeList.removeChild(edit);
-  });
-
-  var edit = document.createElement("BUTTON");
-  edit.innerHTML = "edit";
-  nodeList.appendChild(edit);
-  edit.addEventListener("click", () => {
-    title.value = obj.title;
-    content.value = obj.des;
-
-    // submitBtn.innerHTML="update";
-
-    nodeList.removeChild(heading);
-    nodeList.removeChild(para);
-    nodeList.removeChild(del);
-    nodeList.removeChild(edit);
-  });
-  
+  display();
   title.value = ""; // Reset title
   content.value = ""; // Reset content
-
-  localStorage.setItem('notes', JSON.stringify(array));
 });
 
+function display() {
+  let container = document.querySelector("#display");
+  container.innerHTML = ''; 
 
+  notes.forEach((note, index) => {
+    let nodeList = document.createElement("li");
 
-container.appendChild(nodeList);
+    let heading = document.createElement("h4");
+    heading.textContent = note.title;
+    nodeList.appendChild(heading);
 
+    let para = document.createElement("p");
+    para.textContent = note.content;
+    nodeList.appendChild(para);
 
+    var del = document.createElement("BUTTON");
+    del.innerHTML = "delete";
+    nodeList.appendChild(del);
 
+    del.addEventListener("click", () => {
+      notes.splice(index, 1);
+      
+      localStorage.setItem('notes', JSON.stringify(notes));
+      display(); 
+    });
 
+    var edit = document.createElement("BUTTON");
+    edit.innerHTML = "edit";
+    nodeList.appendChild(edit);
+
+    edit.addEventListener("click", () => {
+      title.value = note.title;
+      content.value = note.content;
+      submitBtn.innerHTML = "update";
+ 
+      nodeList.removeChild(heading);
+     nodeList.removeChild(para);
+     nodeList.removeChild(del);
+     nodeList.removeChild(edit);
+    });
+
+    container.appendChild(nodeList);
+  });
+}

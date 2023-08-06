@@ -1,15 +1,15 @@
 let title = document.querySelector("#title");
 let content = document.querySelector("#content");
-let unOrderList = document.createElement("ul");
 
 let submitBtn = document.querySelector("#submit");
 let form = document.getElementById("notesForm");
 let notes = [];
+let flag = 0;
 
 window.onload = () => {
-  notes = JSON.parse(localStorage.getItem('notes')) || []; 
-  display(); 
-}
+  notes = JSON.parse(localStorage.getItem("notes")) || [];
+  display();
+};
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -20,21 +20,21 @@ form.addEventListener("submit", (event) => {
     const obj = { title: value1, content: value2 };
     notes.push(obj);
   } else {
-  
+    notes[flag]["title"] = value1;
+    notes[flag]["content"] = value2;
     submitBtn.innerHTML = "submit";
   }
 
- 
-  localStorage.setItem('notes', JSON.stringify(notes));
-
+  localStorage.setItem("notes", JSON.stringify(notes));
   display();
+
   title.value = ""; // Reset title
   content.value = ""; // Reset content
 });
 
 function display() {
   let container = document.querySelector("#display");
-  container.innerHTML = ''; 
+  container.innerHTML = "";
 
   notes.forEach((note, index) => {
     let nodeList = document.createElement("li");
@@ -43,9 +43,11 @@ function display() {
     heading.textContent = note.title;
     nodeList.appendChild(heading);
 
+    heading.addEventListener("click", () =>{
     let para = document.createElement("p");
     para.textContent = note.content;
     nodeList.appendChild(para);
+  
 
     var del = document.createElement("BUTTON");
     del.innerHTML = "delete";
@@ -53,9 +55,9 @@ function display() {
 
     del.addEventListener("click", () => {
       notes.splice(index, 1);
-      
-      localStorage.setItem('notes', JSON.stringify(notes));
-      display(); 
+
+      localStorage.setItem("notes", JSON.stringify(notes));
+      display();
     });
 
     var edit = document.createElement("BUTTON");
@@ -66,12 +68,10 @@ function display() {
       title.value = note.title;
       content.value = note.content;
       submitBtn.innerHTML = "update";
- 
-      nodeList.removeChild(heading);
-     nodeList.removeChild(para);
-     nodeList.removeChild(del);
-     nodeList.removeChild(edit);
+      flag = index;
+      display();
     });
+  })
 
     container.appendChild(nodeList);
   });
